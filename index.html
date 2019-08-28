@@ -88,7 +88,7 @@
       <!-- k: <span id="demoK"></span>
     <input type="range" min="0" max="10" value="1.386" class="slider" id="sliderK" step="any"> -->
     <select name="state" id="state" onchange="call_both()">
-      <option value="">Select your state (default as Georgia)</option>
+      <option value="">Select your state</option>
   <option value="US">ALL</option>
   <option value="AL">Alabama</option>
   <option value="AK">Alaska</option>
@@ -170,9 +170,8 @@
   var rsltHurricane = {}
   var flcounties = {}
   var flcount = {}
-
   var selectRegion = document.getElementById("state").selectedIndex
-  selectRegion = 14;
+
   var color_domain     = [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
   var ext_color_domain = [  0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0]
   var legend_labels    = ["0.20", "0.22", "0.24", "0.26", "0.28", "0.30", "0.32", "0.34", "0.36", "0.38", "0.40"]
@@ -235,7 +234,7 @@
 
     var selectExample = d3.selectAll("path")
     selectExample.style("fill", function (d) { 
-      if (selectRegion != 1  & Math.floor(d.id/1000) != selectRegion - 1) {
+      if (selectRegion > 1  & Math.floor(d.id/1000) != selectRegion - 1) {
         return 'white';
       }
       else {
@@ -257,7 +256,7 @@
 
     var selectExample = d3.selectAll("path")
     selectExample.style("fill", function (d) {   
-      if (selectRegion !=1 & Math.floor(d.id/1000) != selectRegion - 1) {
+      if (selectRegion >1 & Math.floor(d.id/1000) != selectRegion - 1) {
         return 'white';
       }
       else {
@@ -722,10 +721,8 @@
     // .attr("height", height);
 
     var states = topojson.feature(us, us.objects.states).features;
-    if (selectRegion ==0){selectRegion = 14;}
     if (selectRegion >1)
     {var state = states.filter(function(d) { return d.id == (selectRegion-1);})[0];}
-    
     var counties = topojson.feature(us, us.objects.counties).features;
     var sta_fip = selectRegion - 1;
 
